@@ -25,7 +25,7 @@ public class AverageSessionDurationTest {
 
         AverageSessionDuration averageSessionDuration = new AverageSessionDuration();
 
-        Assertions.assertEquals("480,00 мин", averageSessionDuration.analyze(sleepingSessions).getResult());
+        Assertions.assertEquals("480.00 мин", averageSessionDuration.analyze(sleepingSessions).getResult());
     }
 
     @Test
@@ -33,6 +33,6 @@ public class AverageSessionDurationTest {
         List<SleepingSession> sleepingSessions = List.of();
         AverageSessionDuration averageSessionDuration = new AverageSessionDuration();
 
-        Assertions.assertEquals("0,00 мин", averageSessionDuration.analyze(sleepingSessions).getResult());
+        Assertions.assertEquals("0.00 мин", averageSessionDuration.analyze(sleepingSessions).getResult());
     }
 }
