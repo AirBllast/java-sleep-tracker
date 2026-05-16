@@ -7,25 +7,35 @@ public class PersonType implements AnalysisFunctions {
     @Override
     public SleepAnalysisResult analyze(List<SleepingSession> sessions) {
 
-        String result;
-
         List<SleepingSession> nightSessions = sessions.stream()
                 .filter(s -> s.getEndSession().toLocalDate().isAfter(s.getStartSession().toLocalDate()))
                 .toList();
 
         long nightsLikeOwl = nightSessions.stream()
-                .filter(s -> s.getEndSession().toLocalDate().isAfter(s.getStartSession().toLocalDate()) &&
-                        s.getStartSession().toLocalTime().isAfter(LocalTime.of(23, 0)) &&
-                        s.getEndSession().toLocalTime().isAfter(LocalTime.of(9, 0)))
+                .filter(s -> {
+                    LocalTime start = s.getStartSession().toLocalTime();
+                    LocalTime end = s.getEndSession().toLocalTime();
+                    return !start.isBefore(LocalTime.of(23, 0))
+                            && !end.isBefore(LocalTime.of(9, 0));
+                })
                 .count();
 
         long nightsLikeLark = nightSessions.stream()
-                .filter(s -> s.getEndSession().toLocalDate().isAfter(s.getStartSession().toLocalDate()) &&
-                        s.getStartSession().toLocalTime().isBefore(LocalTime.of(22, 0)) &&
-                        s.getEndSession().toLocalTime().isBefore(LocalTime.of(7, 0)))
+                .filter(s -> {
+                    LocalTime start = s.getStartSession().toLocalTime();
+                    LocalTime end = s.getEndSession().toLocalTime();
+                    return !start.isAfter(LocalTime.of(22, 0))
+                            && !end.isAfter(LocalTime.of(7, 0));
+                })
                 .count();
 
         long nightsLikeDove = nightSessions.size() - nightsLikeOwl - nightsLikeLark;
+
+        if (nightsLikeDove < 0) {
+            nightsLikeDove = 0;
+        }
+
+        String result;
 
         if (nightsLikeOwl > nightsLikeLark && nightsLikeOwl > nightsLikeDove) {
             result = "Ваш хронотип сова";

@@ -1,9 +1,9 @@
 package ru.yandex.practicum.sleeptracker;
 
 public class SleepAnalysisResult {
-    private String functionName;
-    private String result;
-    private String description;
+    final private String functionName;
+    final private String result;
+    final private String description;
 
     public SleepAnalysisResult(String functionName, String result, String description) {
         this.functionName = functionName;

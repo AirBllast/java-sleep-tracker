@@ -42,6 +42,11 @@ public class SleepTrackerApp {
                     })
                     .toList();
 
+            if (sleepingSessions.isEmpty()) {
+                System.out.println("Список сессий сна не может быть пустым");
+                return;
+            }
+
             System.out.println("\n------------------Анализ Сна------------------\n");
 
             analysisFunctions.stream()

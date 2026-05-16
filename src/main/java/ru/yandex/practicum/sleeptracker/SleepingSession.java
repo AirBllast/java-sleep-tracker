@@ -4,10 +4,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class SleepingSession {
-    private LocalDateTime startSession;
-    private LocalDateTime endSession;
-    private SleepingQuality quality;
-    private Duration duration;
+    private final LocalDateTime startSession;
+    private final LocalDateTime endSession;
+    private final SleepingQuality quality;
+    private final Duration duration;
 
     public SleepingSession(LocalDateTime startSession, LocalDateTime endSession, SleepingQuality quality) {
         this.startSession = startSession;

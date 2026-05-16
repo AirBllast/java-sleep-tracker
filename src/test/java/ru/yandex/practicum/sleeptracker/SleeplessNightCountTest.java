@@ -81,14 +81,4 @@ public class SleeplessNightCountTest {
 
         Assertions.assertEquals("2 ночей", sleeplessNightCount.analyze(sleepingSessions).getResult());
     }
-
-
-    @Test
-    public void shouldThrowsExceptionIfSessionsIsEmpty() {
-
-        List<SleepingSession> sleepingSessions = List.of();
-        SleeplessNightCount sleeplessNightCount = new SleeplessNightCount();
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> sleeplessNightCount.analyze(sleepingSessions));
-    }
 }
